@@ -1,49 +1,61 @@
+/* Base */
+* { box-sizing: border-box; }
 body {
-  font-family: sans-serif;
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   background: #0f172a;
-  color: white;
+  color: #e2e8f0;
+  min-height: 100vh;
   display: grid;
   place-items: center;
-  height: 100vh;
+  padding: 24px;              /* desktop padding */
 }
+
+/* Card */
 .card {
   background: #111827;
   border: 1px solid #1f2937;
   border-radius: 16px;
   padding: 24px;
   width: 100%;
-  max-width: 520px;   /* keeps it nice on desktop */
-  margin: 0 auto;     /* center on larger screens */
+  max-width: 520px;           /* desktop max width */
+  margin: 0 auto;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
-input, select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 4px;
-  margin-bottom: 10px;
-}
-button {
-  width: 100%;
-  padding: 10px;
-  background: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 6px;
-}
-.error { color: #f87171; font-size: 12px; }
-.success { color: #34d399; font-size: 13px; margin-top: 8px; }
 
+h2 { margin: 0 0 14px; }
+
+/* Inputs */
+input, select, button {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1px solid #374151;
+  background: #0b1220;
+  color: #e5e7eb;
+  font-size: 16px;            /* prevents iOS zoom */
+}
+
+button {
+  background: #2563eb;
+  border: 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ----- Mobile first tweaks ----- */
 @media (max-width: 600px) {
-  body {
-    padding: 12px;
-  }
+  body { padding: 12px; }     /* reduce side padding */
   .card {
     padding: 16px;
     border-radius: 12px;
-    max-width: 100%;   /* use full width on phone */
+    max-width: 100%;          /* take full phone width */
   }
-  input, select, button {
-    font-size: 16px;   /* better tap targets */
-    padding: 14px;     /* more comfortable on touch */
-  }
+}
+
+/* Optional: even tighter on very small phones */
+@media (max-width: 380px) {
+  body { padding: 8px; }
+  .card { padding: 12px; }
 }
