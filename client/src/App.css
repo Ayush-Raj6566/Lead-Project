@@ -8,9 +8,13 @@ body {
 }
 .card {
   background: #111827;
-  padding: 20px;
-  border-radius: 10px;
-  width: 400px;
+  border: 1px solid #1f2937;
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 520px;   /* keeps it nice on desktop */
+  margin: 0 auto;     /* center on larger screens */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 input, select {
   width: 100%;
@@ -28,3 +32,18 @@ button {
 }
 .error { color: #f87171; font-size: 12px; }
 .success { color: #34d399; font-size: 13px; margin-top: 8px; }
+
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+  .card {
+    padding: 16px;
+    border-radius: 12px;
+    max-width: 100%;   /* use full width on phone */
+  }
+  input, select, button {
+    font-size: 16px;   /* better tap targets */
+    padding: 14px;     /* more comfortable on touch */
+  }
+}
