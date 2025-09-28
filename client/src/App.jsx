@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+// Use env var in production, empty in local dev (Vite proxy handles /api)
+const API_BASE = import.meta.env.VITE_API_BASE || "";
+
 export default function App() {
   const [form, setForm] = useState({ name: "", email: "", whatsapp: "", city: "", state: "" });
   const [msg, setMsg] = useState("");
@@ -7,17 +10,26 @@ export default function App() {
   async function handleSubmit(e) {
     e.preventDefault();
     setMsg("Saving...");
-    const res = await fetch("/api/leads", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form)
-    });
-    if (res.ok) {
+    try {
+      const res = await fetch(`${API_BASE}/api/leads`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      // If server returned HTML error page, avoid res.json() crash
+      const contentType = res.headers.get("content-type") || "";
+      const parseJSON = contentType.includes("application/json");
+
+      if (!res.ok) {
+        const data = parseJSON ? await res.json() : {};
+        throw new Error(data.error || "Request failed");
+      }
+
       setMsg("✅ Saved Successfully. We will contact you!");
       setForm({ name: "", email: "", whatsapp: "", city: "", state: "" });
-    } else {
-      const data = await res.json();
-      setMsg("❌ " + (data.error || "Failed"));
+    } catch (err) {
+      setMsg("❌ " + (err?.message || "Failed"));
     }
   }
 
