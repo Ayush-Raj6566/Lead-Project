@@ -34,6 +34,14 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: err?.message || "Server error" });
 });
 
+app.get("/api/diag/secrets", (req, res) => {
+  const keyPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+  let exists = false, list = [];
+  try { exists = fs.existsSync(keyPath); } catch {}
+  try { list = fs.readdirSync("/etc/secrets"); } catch {}
+  res.json({ keyPath, exists, secretsDir: list });
+});
+
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
 });
