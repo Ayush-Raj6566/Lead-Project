@@ -1,0 +1,30 @@
+body {
+  font-family: sans-serif;
+  background: #0f172a;
+  color: white;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+.card {
+  background: #111827;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+}
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+button {
+  width: 100%;
+  padding: 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+.error { color: #f87171; font-size: 12px; }
+.success { color: #34d399; font-size: 13px; margin-top: 8px; }
